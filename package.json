@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://beamendivil.github.io/se_project_react/",
+  "homepage": "https://api.quemepongo.baselinux.net",
   "scripts": {
     "start": "PORT=3001 node app.js",
     "dev": "PORT=3001 nodemon app.js",
@@ -31,6 +31,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^9.2.1",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.10.2",
@@ -38,7 +39,7 @@
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "gh-pages": "6.3.0",
+    "gh-pages": "^6.3.0",
     "nodemon": "^3.1.11",
     "prettier": "^2.8.8",
     "vite": "^7.3.1"
