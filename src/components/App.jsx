@@ -25,31 +25,43 @@ import {
   removeCardLike,
 } from "../utils/api";
 import { register, authorize, checkToken } from "../utils/auth";
+import demoData from "../../db.json";
 
 import "../blocks/App.css";
+
+const demoItems = demoData.items.map((item) => ({
+  ...item,
+  likes: item.likes || [],
+}));
+
+const fallbackWeatherData = {
+  city: "New York",
+  temperature: { F: 68, C: 20 },
+  condition: "Partly Cloudy",
+  weatherType: "warm",
+};
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
-  const [weatherData, setWeatherData] = useState(null);
-  const [clothingItems, setClothingItems] = useState([]);
+  const [weatherData, setWeatherData] = useState(fallbackWeatherData);
+  const [clothingItems, setClothingItems] = useState(demoItems);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [itemToDelete, setItemToDelete] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
   // Fetch weather data and clothing items on component mount
   useEffect(() => {
     const loadInitialData = async () => {
-      setIsLoading(true);
       try {
         // Fetch clothing items from the server
         const items = await getItems();
         setClothingItems(items);
       } catch (error) {
         console.error("Error loading clothing items:", error);
-        setClothingItems([]);
+        setClothingItems(demoItems);
       }
 
       try {
@@ -59,13 +71,7 @@ function App() {
         setWeatherData(weather);
       } catch (error) {
         console.error("Error loading weather data:", error);
-        // Set fallback weather data
-        setWeatherData({
-          city: "New York",
-          temperature: { F: 68, C: 20 },
-          condition: "Partly Cloudy",
-          weatherType: "warm",
-        });
+        setWeatherData(fallbackWeatherData);
       }
       setIsLoading(false);
     };
@@ -292,7 +298,7 @@ function App() {
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
-          <Router>
+          <Router basename={import.meta.env.BASE_URL}>
             <Header
               onAddClothesClick={handleOpenAddClothesModal}
               onSignUp={handleOpenSignUpModal}

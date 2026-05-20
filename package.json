@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://api.quemepongo.baselinux.net",
+  "homepage": "https://beamendivil.github.io/WTWR-Frontend-React-Weather-Based-Wardrobe-App",
   "scripts": {
     "start": "PORT=3001 node app.js",
     "dev": "PORT=3001 nodemon app.js",
